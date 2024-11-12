@@ -1,23 +1,23 @@
 package inmemorycache
 
-type cache struct {
-	storage map[string]int
+type cache[T any] struct {
+	storage map[string]T
 }
 
-func New() *cache {
-	return &cache{
-		storage: make(map[string]int),
+func New[T any]() *cache[T] {
+	return &cache[T]{
+		storage: make(map[string]T),
 	}
 }
 
-func (c *cache) Set(k string, v int) {
+func (c *cache[T]) Set(k string, v T) {
 	c.storage[k] = v
 }
 
-func (c *cache) Get(k string) int {
+func (c *cache[T]) Get(k string) T {
 	return c.storage[k]
 }
 
-func (c *cache) Delete(k string) {
+func (c *cache[T]) Delete(k string) {
 	delete(c.storage, k)
 }
